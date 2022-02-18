@@ -51,23 +51,23 @@ public class UIController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.current.ScreenPointToRay(touch.position);
         var hits = new List<ARRaycastHit>();
+
+        if (!_arRaycastManager.Raycast(touch.position, hits, TrackableType.Planes))
+            return;
         
-        if (_arRaycastManager.Raycast(touch.position, hits, TrackableType.Planes))
+        if (touch.phase == TouchPhase.Began && _editingFurniture == null)
         {
-            if (touch.phase == TouchPhase.Began && _editingFurniture == null)
+            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Spawnable")
             {
-                if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Spawnable")
-                {
-                    _editingFurniture = hit.collider.gameObject;
-                }
-            } else if (touch.phase == TouchPhase.Moved && _editingFurniture != null)
-            {
-                _editingFurniture.transform.position = hits[0].pose.position;
+                _editingFurniture = hit.collider.gameObject;
             }
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                _editingFurniture = null;
-            }
+        } else if (touch.phase == TouchPhase.Moved && _editingFurniture != null)
+        {
+            _editingFurniture.transform.position = hits[0].pose.position;
+        }
+        else if (touch.phase == TouchPhase.Ended)
+        {
+            _editingFurniture = null;
         }
     }
 
