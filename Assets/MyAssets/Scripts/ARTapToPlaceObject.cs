@@ -12,7 +12,6 @@ public class ARTapToPlaceObject : MonoBehaviour
     private Pose _placementPose;
     private ARRaycastManager _arRaycastManager;
     private bool _placementPoseIsValid = false;
-    // Start is called before the first frame update
     void Start()
     {
         _arRaycastManager = FindObjectOfType<ARRaycastManager>();
@@ -20,7 +19,7 @@ public class ARTapToPlaceObject : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
-        UpdatePlacementPost();
+        UpdatePlacementPose();
         UpdatePlacementIndicator();
 
         if (_placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -29,7 +28,7 @@ public class ARTapToPlaceObject : MonoBehaviour
         }
     }
 
-    private void UpdatePlacementPost()
+    private void UpdatePlacementPose()
     {
         var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         var hits = new List<ARRaycastHit>();
