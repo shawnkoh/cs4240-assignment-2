@@ -788,8 +788,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3727f548f616842509b7c1d23b4627b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furniture0Prefab: {fileID: 0}
-  furniture1Prefab: {fileID: 0}
+  furniture0Prefab: {fileID: 4371676552298586696, guid: e83edbaec2cda46ecbe67d89b25634bf,
+    type: 3}
+  furniture1Prefab: {fileID: 7921791224667377129, guid: 4a65879061ec245028b1b3e8a6e5509c,
+    type: 3}
 --- !u!4 &212175866532230322
 Transform:
   m_ObjectHideFlags: 0

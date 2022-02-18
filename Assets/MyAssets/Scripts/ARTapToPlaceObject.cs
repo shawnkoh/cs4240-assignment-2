@@ -33,17 +33,15 @@ public class ARTapToPlaceObject : MonoBehaviour
     {
         var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         var hits = new List<ARRaycastHit>();
-        _arRaycastManager.Raycast(screenCenter, hits);
+        _arRaycastManager.Raycast(screenCenter, hits, TrackableType.Planes);
         if (hits.Count == 0)
         {
             _placementPoseIsValid = false;
             return;
         }
-
         var hit = hits[0];
-        Debug.Log(hit.hitType);
-        Debug.Log(hit.trackable);
-        _placementPoseIsValid = hit.trackable.tag != "Spawnable" && hit.hitType == TrackableType.Planes;
+
+        _placementPoseIsValid = true;
         if (!_placementPoseIsValid)
             return;
         _placementPose = hit.pose;

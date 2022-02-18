@@ -10,9 +10,12 @@ public class UIController : MonoBehaviour
 {
     public GameObject furniture0Prefab;
     public GameObject furniture1Prefab;
+    public GameObject furniture2Prefab;
     private Button furniture0;
     private Button furniture1;
-    private Button place;
+    private Button furniture2;
+    private Button _placeButton;
+    private Button _deleteButton;
 
     private ARTapToPlaceObject _arTapToPlaceObject;
     private ARRaycastManager _arRaycastManager;
@@ -27,11 +30,12 @@ public class UIController : MonoBehaviour
 
         furniture0 = root.Q<Button>("furniture0");
         furniture1 = root.Q<Button>("furniture1");
-        place = root.Q<Button>("place");
+        _placeButton = root.Q<Button>("place");
 
         furniture0.clicked += Furniture0Pressed;
         furniture1.clicked += Furniture1Pressed;
-        place.clicked += PlacePressed;
+        // furniture2.clicked += SelectFurniture(furniture2Prefab);
+        _placeButton.clicked += PlaceButtonPressed;
         
         _arTapToPlaceObject = GameObject.Find("Interaction").GetComponent<ARTapToPlaceObject>();
     }
@@ -43,28 +47,27 @@ public class UIController : MonoBehaviour
             return;
         
         var touch = Input.GetTouch(0);
+        
+        RaycastHit hit;
+        Ray ray = Camera.current.ScreenPointToRay(touch.position);
         var hits = new List<ARRaycastHit>();
-        _arRaycastManager.Raycast(touch.position, hits);
-        if (hits.Count == 0)
-            return;
-        var hit = hits[0];
-        var hitObject = hit.trackable.gameObject;
-        
-        Debug.Log(hitObject.tag);
-        if (hitObject.tag != "Spawnable")
-            return;
-        
-        _editingFurniture = hitObject;
-
-        switch (touch.phase)
+        // FIXME: Unsure if should filter here
+        if (_arRaycastManager.Raycast(touch.position, hits, TrackableType.Planes))
         {
-            case TouchPhase.Began:
-            case TouchPhase.Moved:
-                _editingFurniture.transform.position = hit.pose.position;
-                break;
-            case TouchPhase.Ended:
+            if (touch.phase == TouchPhase.Began && _editingFurniture == null)
+            {
+                if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Spawnable")
+                {
+                    _editingFurniture = hit.collider.gameObject;
+                }
+            } else if (touch.phase == TouchPhase.Moved && _editingFurniture != null)
+            {
+                _editingFurniture.transform.position = hits[0].pose.position;
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
                 _editingFurniture = null;
-                break;
+            }
         }
     }
 
@@ -89,12 +92,12 @@ public class UIController : MonoBehaviour
         {
             _arTapToPlaceObject.objectToPlace = prefab;
         }
-        place.SetEnabled(_arTapToPlaceObject.objectToPlace != null);
+        _placeButton.SetEnabled(_arTapToPlaceObject.objectToPlace != null);
     }
 
-    void PlacePressed()
+    void PlaceButtonPressed()
     {
         _arTapToPlaceObject.PlaceObject();
-        place.SetEnabled(false);
+        _placeButton.SetEnabled(false);
     }
 }
