@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
     private Button _furnitureButton1;
     private Button _furnitureButton2;
     private Button _primaryButton;
+    private Button _deselectButton;
 
     private ARTapToPlaceObject _arTapToPlaceObject;
     private ARRaycastManager _arRaycastManager;
@@ -31,13 +32,18 @@ public class UIController : MonoBehaviour
         _furnitureButton1 = root.Q<Button>("furniture1");
         _furnitureButton2 = root.Q<Button>("furniture2");
         _primaryButton = root.Q<Button>("primary");
+        _deselectButton = root.Q<Button>("deselect");
 
         _furnitureButton0.clicked += () => SelectFurniture(furniture0Prefab);
         _furnitureButton1.clicked += () => SelectFurniture(furniture1Prefab);
         _furnitureButton2.clicked += () => SelectFurniture(furniture2Prefab);
         _primaryButton.clicked += PrimaryButtonPressed;
+        _deselectButton.clicked += DeselectButtonPressed;
         
         _arTapToPlaceObject = GameObject.Find("Interaction").GetComponent<ARTapToPlaceObject>();
+        
+        _primaryButton.SetEnabled(false);
+        _deselectButton.SetEnabled(false);
     }
 
     private bool _isDraggable = false;
@@ -76,6 +82,7 @@ public class UIController : MonoBehaviour
         }
         _primaryButton.SetEnabled(true);
         _primaryButton.text = "Delete Furniture";
+        _deselectButton.SetEnabled(true);
     }
 
     void SelectFurniture(GameObject prefab)
@@ -91,6 +98,7 @@ public class UIController : MonoBehaviour
         }
         _primaryButton.SetEnabled(_arTapToPlaceObject.objectToPlace != null);
         _primaryButton.text = "Place Furniture";
+        _deselectButton.SetEnabled(false);
     }
 
     void PrimaryButtonPressed()
@@ -105,5 +113,13 @@ public class UIController : MonoBehaviour
             _editingFurniture = null;
         }
         _primaryButton.SetEnabled(false);
+    }
+
+    void DeselectButtonPressed()
+    {
+        _editingFurniture = null;
+        _primaryButton.SetEnabled(false);
+        _deselectButton.SetEnabled(false);
+        _primaryButton.text = "Place Furniture";
     }
 }
