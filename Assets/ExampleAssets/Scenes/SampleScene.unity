@@ -790,7 +790,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furniture0Prefab: {fileID: 4371676552298586696, guid: e83edbaec2cda46ecbe67d89b25634bf,
     type: 3}
-  furniture1Prefab: {fileID: 7921791224667377129, guid: 4a65879061ec245028b1b3e8a6e5509c,
+  furniture1Prefab: {fileID: 8303372201660070772, guid: c140b96589ab7401ca19eb32589995cc,
+    type: 3}
+  furniture2Prefab: {fileID: 3652500016861245730, guid: bba938a9c7ff24ddca39fb568d6f0951,
     type: 3}
 --- !u!4 &212175866532230322
 Transform:

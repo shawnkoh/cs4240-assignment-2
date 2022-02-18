@@ -11,11 +11,10 @@ public class UIController : MonoBehaviour
     public GameObject furniture0Prefab;
     public GameObject furniture1Prefab;
     public GameObject furniture2Prefab;
-    private Button furniture0;
-    private Button furniture1;
-    private Button furniture2;
-    private Button _placeButton;
-    private Button _deleteButton;
+    private Button _furnitureButton0;
+    private Button _furnitureButton1;
+    private Button _furnitureButton2;
+    private Button _primaryButton;
 
     private ARTapToPlaceObject _arTapToPlaceObject;
     private ARRaycastManager _arRaycastManager;
@@ -28,14 +27,15 @@ public class UIController : MonoBehaviour
         _arRaycastManager = FindObjectOfType<ARRaycastManager>();
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        furniture0 = root.Q<Button>("furniture0");
-        furniture1 = root.Q<Button>("furniture1");
-        _placeButton = root.Q<Button>("place");
+        _furnitureButton0 = root.Q<Button>("furniture0");
+        _furnitureButton1 = root.Q<Button>("furniture1");
+        _furnitureButton2 = root.Q<Button>("furniture2");
+        _primaryButton = root.Q<Button>("primary");
 
-        furniture0.clicked += Furniture0Pressed;
-        furniture1.clicked += Furniture1Pressed;
-        // furniture2.clicked += SelectFurniture(furniture2Prefab);
-        _placeButton.clicked += PlaceButtonPressed;
+        _furnitureButton0.clicked += FurnitureButton0Pressed;
+        _furnitureButton1.clicked += FurnitureButton1Pressed;
+        _furnitureButton2.clicked += () => SelectFurniture(furniture2Prefab);
+        _primaryButton.clicked += PrimaryButtonPressed;
         
         _arTapToPlaceObject = GameObject.Find("Interaction").GetComponent<ARTapToPlaceObject>();
     }
@@ -51,7 +51,7 @@ public class UIController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.current.ScreenPointToRay(touch.position);
         var hits = new List<ARRaycastHit>();
-        // FIXME: Unsure if should filter here
+        
         if (_arRaycastManager.Raycast(touch.position, hits, TrackableType.Planes))
         {
             if (touch.phase == TouchPhase.Began && _editingFurniture == null)
@@ -71,13 +71,13 @@ public class UIController : MonoBehaviour
         }
     }
 
-    void Furniture0Pressed()
+    void FurnitureButton0Pressed()
     {
         SelectFurniture(furniture0Prefab);
         // FIXME: Highlight button
     }
     
-    void Furniture1Pressed()
+    void FurnitureButton1Pressed()
     {
         SelectFurniture(furniture1Prefab);
     }
@@ -92,12 +92,12 @@ public class UIController : MonoBehaviour
         {
             _arTapToPlaceObject.objectToPlace = prefab;
         }
-        _placeButton.SetEnabled(_arTapToPlaceObject.objectToPlace != null);
+        _primaryButton.SetEnabled(_arTapToPlaceObject.objectToPlace != null);
     }
 
-    void PlaceButtonPressed()
+    void PrimaryButtonPressed()
     {
         _arTapToPlaceObject.PlaceObject();
-        _placeButton.SetEnabled(false);
+        _primaryButton.SetEnabled(false);
     }
 }
