@@ -32,8 +32,8 @@ public class UIController : MonoBehaviour
         _furnitureButton2 = root.Q<Button>("furniture2");
         _primaryButton = root.Q<Button>("primary");
 
-        _furnitureButton0.clicked += FurnitureButton0Pressed;
-        _furnitureButton1.clicked += FurnitureButton1Pressed;
+        _furnitureButton0.clicked += () => SelectFurniture(furniture0Prefab);
+        _furnitureButton1.clicked += () => SelectFurniture(furniture1Prefab);
         _furnitureButton2.clicked += () => SelectFurniture(furniture2Prefab);
         _primaryButton.clicked += PrimaryButtonPressed;
         
@@ -74,21 +74,13 @@ public class UIController : MonoBehaviour
         {
             _isDraggable = false;
         }
-    }
-
-    void FurnitureButton0Pressed()
-    {
-        SelectFurniture(furniture0Prefab);
-        // FIXME: Highlight button
-    }
-    
-    void FurnitureButton1Pressed()
-    {
-        SelectFurniture(furniture1Prefab);
+        _primaryButton.SetEnabled(true);
+        _primaryButton.text = "Delete Furniture";
     }
 
     void SelectFurniture(GameObject prefab)
     {
+        _editingFurniture = null;
         if (_arTapToPlaceObject.objectToPlace == prefab)
         {
             _arTapToPlaceObject.objectToPlace = null;
@@ -98,11 +90,20 @@ public class UIController : MonoBehaviour
             _arTapToPlaceObject.objectToPlace = prefab;
         }
         _primaryButton.SetEnabled(_arTapToPlaceObject.objectToPlace != null);
+        _primaryButton.text = "Place Furniture";
     }
 
     void PrimaryButtonPressed()
     {
-        _arTapToPlaceObject.PlaceObject();
+        if (_editingFurniture == null)
+        {
+            _arTapToPlaceObject.PlaceObject();
+        }
+        else
+        {
+            Destroy(_editingFurniture);
+            _editingFurniture = null;
+        }
         _primaryButton.SetEnabled(false);
     }
 }
