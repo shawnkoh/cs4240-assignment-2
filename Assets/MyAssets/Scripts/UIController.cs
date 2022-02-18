@@ -40,6 +40,8 @@ public class UIController : MonoBehaviour
         _arTapToPlaceObject = GameObject.Find("Interaction").GetComponent<ARTapToPlaceObject>();
     }
 
+    private bool _isDraggable = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -55,19 +57,22 @@ public class UIController : MonoBehaviour
         if (!_arRaycastManager.Raycast(touch.position, hits, TrackableType.Planes))
             return;
         
-        if (touch.phase == TouchPhase.Began && _editingFurniture == null)
+        if (touch.phase == TouchPhase.Began)
         {
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Spawnable")
-            {
-                _editingFurniture = hit.collider.gameObject;
-            }
-        } else if (touch.phase == TouchPhase.Moved && _editingFurniture != null)
+            if (!Physics.Raycast(ray, out hit))
+                return;
+            if (hit.collider.gameObject.tag != "Spawnable")
+                return;
+            _editingFurniture = hit.collider.gameObject;
+            _isDraggable = true;
+
+        } else if (_isDraggable && touch.phase == TouchPhase.Moved && _editingFurniture != null)
         {
             _editingFurniture.transform.position = hits[0].pose.position;
         }
         else if (touch.phase == TouchPhase.Ended)
         {
-            _editingFurniture = null;
+            _isDraggable = false;
         }
     }
 
