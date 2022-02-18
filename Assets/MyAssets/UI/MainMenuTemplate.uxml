@@ -1,8 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" ml="UnityEditor.XR.MagicLeap" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="Background" style="height: auto; background-color: rgba(0, 0, 0, 0); flex-grow: 1; align-items: center; justify-content: flex-end;">
         <ui:VisualElement style="background-color: rgb(255, 255, 255); border-top-left-radius: 16px; border-bottom-left-radius: 16px; border-top-right-radius: 16px; border-bottom-right-radius: 16px; flex-grow: initial; flex-shrink: 1; flex-direction: column; flex-wrap: nowrap; bottom: 10%; align-items: center; justify-content: center;">
-            <ui:Button text="Button" display-tooltip-when-elided="true" name="button0" />
-            <ui:Button text="Button" display-tooltip-when-elided="true" name="button1" />
+            <ui:Button text="furniture0" display-tooltip-when-elided="true" name="furniture0" />
+            <ui:Button text="furniture1" display-tooltip-when-elided="true" name="furniture1" />
+            <ui:Button text="place" display-tooltip-when-elided="true" name="place" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
