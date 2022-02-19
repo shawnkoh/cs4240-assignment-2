@@ -22,6 +22,8 @@ public class UIController : MonoBehaviour
 
     private GameObject _editingFurniture;
 
+    private GameObject _selectedIndicator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,8 @@ public class UIController : MonoBehaviour
         
         _primaryButton.SetEnabled(false);
         _deselectButton.SetEnabled(false);
+        
+        _selectedIndicator = GameObject.Find("SelectedIndicator");
     }
 
     private bool _isDraggable = false;
@@ -51,6 +55,16 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_editingFurniture != null)
+        {
+            _selectedIndicator.SetActive(true);
+            var offset = _editingFurniture.transform.localScale.y / 2 + 100;
+            _selectedIndicator.transform.position = _editingFurniture.transform.position + Vector3.up * offset;
+        }
+        else
+        {
+            _selectedIndicator.SetActive(false);
+        }
         if (_arTapToPlaceObject.objectToPlace != null || Input.touchCount == 0)
             return;
         
@@ -80,6 +94,9 @@ public class UIController : MonoBehaviour
         {
             _isDraggable = false;
         }
+
+        if (_editingFurniture != null)
+            return;
         _primaryButton.SetEnabled(true);
         _primaryButton.text = "Delete Furniture";
         _deselectButton.SetEnabled(true);
