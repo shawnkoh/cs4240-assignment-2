@@ -6,8 +6,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 
-public class UIController : MonoBehaviour
-{
+public class UIController : MonoBehaviour {
     public GameObject furniture0Prefab;
     public GameObject furniture1Prefab;
     public GameObject furniture2Prefab;
@@ -25,8 +24,7 @@ public class UIController : MonoBehaviour
     private GameObject _selectedIndicator;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    private void Start() {
         _arRaycastManager = FindObjectOfType<ARRaycastManager>();
         var root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -41,57 +39,49 @@ public class UIController : MonoBehaviour
         _furnitureButton2.clicked += () => SelectFurniture(furniture2Prefab);
         _primaryButton.clicked += PrimaryButtonPressed;
         _deselectButton.clicked += DeselectButtonPressed;
-        
+
         _arTapToPlaceObject = GameObject.Find("Interaction").GetComponent<ARTapToPlaceObject>();
-        
+
         _primaryButton.SetEnabled(false);
         _deselectButton.SetEnabled(false);
-        
+
         _selectedIndicator = GameObject.Find("SelectedIndicator");
     }
 
     private bool _isDraggable = false;
 
     // Update is called once per frame
-    void Update()
-    {
-        if (_editingFurniture != null)
-        {
+    private void Update() {
+        if (_editingFurniture != null) {
             _selectedIndicator.SetActive(true);
             var offset = _editingFurniture.transform.localScale.y / 2 + 100;
             _selectedIndicator.transform.position = _editingFurniture.transform.position + Vector3.up * offset;
-        }
-        else
-        {
+        } else {
             _selectedIndicator.SetActive(false);
         }
+
         if (_arTapToPlaceObject.objectToPlace != null || Input.touchCount == 0)
             return;
-        
+
         var touch = Input.GetTouch(0);
-        
+
         RaycastHit hit;
-        Ray ray = Camera.current.ScreenPointToRay(touch.position);
+        var ray = Camera.current.ScreenPointToRay(touch.position);
         var hits = new List<ARRaycastHit>();
 
         if (!_arRaycastManager.Raycast(touch.position, hits, TrackableType.Planes))
             return;
-        
-        if (touch.phase == TouchPhase.Began)
-        {
+
+        if (touch.phase == TouchPhase.Began) {
             if (!Physics.Raycast(ray, out hit))
                 return;
             if (hit.collider.gameObject.tag != "Spawnable")
                 return;
             _editingFurniture = hit.collider.gameObject;
             _isDraggable = true;
-
-        } else if (_isDraggable && touch.phase == TouchPhase.Moved && _editingFurniture != null)
-        {
+        } else if (_isDraggable && touch.phase == TouchPhase.Moved && _editingFurniture != null) {
             _editingFurniture.transform.position = hits[0].pose.position;
-        }
-        else if (touch.phase == TouchPhase.Ended)
-        {
+        } else if (touch.phase == TouchPhase.Ended) {
             _isDraggable = false;
         }
 
@@ -102,38 +92,30 @@ public class UIController : MonoBehaviour
         _deselectButton.SetEnabled(true);
     }
 
-    void SelectFurniture(GameObject prefab)
-    {
+    private void SelectFurniture(GameObject prefab) {
         _editingFurniture = null;
         if (_arTapToPlaceObject.objectToPlace == prefab)
-        {
             _arTapToPlaceObject.objectToPlace = null;
-        }
         else
-        {
             _arTapToPlaceObject.objectToPlace = prefab;
-        }
+
         _primaryButton.SetEnabled(_arTapToPlaceObject.objectToPlace != null);
         _primaryButton.text = "Place Furniture";
         _deselectButton.SetEnabled(false);
     }
 
-    void PrimaryButtonPressed()
-    {
-        if (_editingFurniture == null)
-        {
+    private void PrimaryButtonPressed() {
+        if (_editingFurniture == null) {
             _arTapToPlaceObject.PlaceObject();
-        }
-        else
-        {
+        } else {
             Destroy(_editingFurniture);
             _editingFurniture = null;
         }
+
         _primaryButton.SetEnabled(false);
     }
 
-    void DeselectButtonPressed()
-    {
+    private void DeselectButtonPressed() {
         _editingFurniture = null;
         _primaryButton.SetEnabled(false);
         _deselectButton.SetEnabled(false);
