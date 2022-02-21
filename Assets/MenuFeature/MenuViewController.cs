@@ -8,7 +8,6 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UIElements;
 
 public class MenuViewController : MonoBehaviour {
-    private BuildingState _buildingState;
     private FurnitureBuildEventChannel _buildEventChannel;
     private FurnitureSpawnEventChannel _spawnEventChannel;
     private AsyncOperationHandle<IList<Furniture>> _loadHandle;
