@@ -845,6 +845,7 @@ GameObject:
   - component: {fileID: 2077677426}
   - component: {fileID: 2077677428}
   - component: {fileID: 2077677429}
+  - component: {fileID: 2077677430}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -913,14 +914,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba41f486daa01400bad333fbc44332c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furniturePrefabs:
-  - {fileID: 7295738670199315476, guid: f261c0573507048888db4fd93caa8f57, type: 3}
-  - {fileID: 1726999100937172357, guid: a2d3c630cdff94ed69670f5894edd655, type: 3}
-  - {fileID: 4371676552298586696, guid: e83edbaec2cda46ecbe67d89b25634bf, type: 3}
-  - {fileID: 8303372201660070772, guid: c140b96589ab7401ca19eb32589995cc, type: 3}
-  - {fileID: 3652500016861245730, guid: bba938a9c7ff24ddca39fb568d6f0951, type: 3}
-  - {fileID: 1050579241965220162, guid: 03d36e425f19d4422b9bb6afe1cdc1a2, type: 3}
-  - {fileID: 7921791224667377129, guid: 4a65879061ec245028b1b3e8a6e5509c, type: 3}
+--- !u!114 &2077677430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077677425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc8783877b34ba2aadbd0ed1040758e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transitionTableSO: {fileID: 0}
+  _debugger:
+    debugTransitions: 0
+    appendConditionsInfo: 1
+    appendActionsInfo: 1
+    currentState: 
 --- !u!4 &212175866532230322
 Transform:
   m_ObjectHideFlags: 0
