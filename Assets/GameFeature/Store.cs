@@ -10,6 +10,10 @@ namespace AppFeature {
         public UnityAction<GameState> OnChange;
         public GameState gameState;
 
+        private void Awake() {
+            gameState = new IdleState();
+        }
+
         public void FurnitureButtonTapped(Furniture furniture) {
             gameState.Switch(
                 idleState => {

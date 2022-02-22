@@ -4,11 +4,6 @@ using OneOf;
 using UnityEngine;
 
 namespace GameFeature {
-    [CreateAssetMenu(menuName = "GameFeature/GameState")]
-    public class GameStateSO : ScriptableObject {
-        public GameState GameState;
-    }
-    
     [Serializable]
     public class GameState : OneOfBase<IdleState, BuildState, EditState> {
         GameState(OneOf<IdleState, BuildState, EditState> _) : base(_) { }

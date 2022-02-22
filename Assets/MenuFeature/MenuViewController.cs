@@ -21,8 +21,6 @@ namespace MenuFeature {
             _loadHandle = Addressables.LoadAssetsAsync<Furniture>("furniture", furniture => 
                 { catalog.Add(new FurnitureButton(store, furniture)); });
             _buttonContainer = root.Q<VisualElement>("buttonContainer");
-            _buttonContainer.Add(new PlaceButton(store));
-            _buttonContainer.Add(new CancelButton(store));
             store.OnChange += Subscriber;
         }
 
@@ -33,9 +31,7 @@ namespace MenuFeature {
 
         private void Subscriber(GameState state) {
             // TODO: This will keep deleting and recreating.
-            foreach (var visualElement in _buttonContainer.Children()) {
-                _buttonContainer.Remove(visualElement);
-            }
+            _buttonContainer.Clear();
             state.Switch(
                 idleState => { },
                 buildState => {
