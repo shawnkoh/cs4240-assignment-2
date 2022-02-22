@@ -7,57 +7,57 @@ using UnityEngine.Events;
 namespace AppFeature {
     [CreateAssetMenu(menuName = "AppFeature/Store")]
     public class Store: ScriptableObject {
-        public UnityAction<AppState> OnChange;
-        public AppState AppState;
+        public UnityAction<GameState> OnChange;
+        public GameState gameState;
 
         public void FurnitureButtonTapped(Furniture furniture) {
-            AppState.Switch(
+            gameState.Switch(
                 idleState => {
-                    AppState = new BuildState(furniture);
+                    gameState = new BuildState(furniture);
                 },
                 buildState => throw new InvalidOperationException(),
                 editState => {
-                    AppState = new BuildState(furniture);
+                    gameState = new BuildState(furniture);
                 }
             );
-            OnChange.Invoke(AppState);
+            OnChange.Invoke(gameState);
         }
 
         public void PlaceButtonTapped() {
-            AppState.Switch(
+            gameState.Switch(
                 idleState => throw new InvalidOperationException(),
                 buildState => {
                     Instantiate(buildState.Furniture.prefab);
-                    AppState = new IdleState();
+                    gameState = new IdleState();
                 },
                 editState => throw new InvalidOperationException()
             );
-            OnChange.Invoke(AppState);
+            OnChange.Invoke(gameState);
         }
 
         public void CancelButtonTapped() {
-            AppState.Switch(
+            gameState.Switch(
                 idleState => throw new InvalidOperationException(),
                 buildState => {
-                    AppState = new IdleState();
+                    gameState = new IdleState();
                 },
                 editState => {
-                    AppState = new IdleState();
+                    gameState = new IdleState();
                 }
             );
-            OnChange.Invoke(AppState);
+            OnChange.Invoke(gameState);
         }
 
         public void DeleteButtonTapped() {
-            AppState.Switch(
+            gameState.Switch(
                 state => throw new InvalidOperationException(),
                 state => throw new InvalidOperationException(),
                 editState => {
                     Destroy(editState.Furniture);
-                    AppState = new IdleState();
+                    gameState = new IdleState();
                 }
             );
-            OnChange.Invoke(AppState);
+            OnChange.Invoke(gameState);
         }
     }
 }

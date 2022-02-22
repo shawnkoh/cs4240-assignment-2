@@ -21,9 +21,9 @@ namespace BuildIndicatorFeature {
             // TODO: Get raycast manager to cast
         }
 
-        private void Subscriber(AppState appState) {
+        private void Subscriber(GameState gameState) {
             // TODO: Do i need to set enabled if i already set active?
-            appState.Switch(
+            gameState.Switch(
                 idleState => {
                     enabled = false;
                     gameObject.SetActive(false);

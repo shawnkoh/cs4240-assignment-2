@@ -31,7 +31,7 @@ namespace MenuFeature {
             store.OnChange -= Subscriber;
         }
 
-        private void Subscriber(AppState state) {
+        private void Subscriber(GameState state) {
             // TODO: This will keep deleting and recreating.
             foreach (var visualElement in _buttonContainer.Children()) {
                 _buttonContainer.Remove(visualElement);

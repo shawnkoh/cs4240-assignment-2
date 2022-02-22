@@ -4,16 +4,20 @@ using OneOf;
 using UnityEngine;
 
 namespace GameFeature {
+    [CreateAssetMenu(menuName = "GameFeature/GameState")]
+    public class GameStateSO : ScriptableObject {
+        public GameState GameState;
+    }
+    
     [Serializable]
-    [CreateAssetMenu(menuName = "Store/AppState")]
-    public class AppState : OneOfBase<IdleState, BuildState, EditState> {
-        AppState(OneOf<IdleState, BuildState, EditState> _) : base(_) { }
+    public class GameState : OneOfBase<IdleState, BuildState, EditState> {
+        GameState(OneOf<IdleState, BuildState, EditState> _) : base(_) { }
 
         // These are just boilerplate code required to use the OneOf package.
         // C# does not support value types yet so this is a necessarily evil.
-        public static implicit operator AppState(IdleState _) => new AppState(_);
-        public static implicit operator AppState(BuildState _) => new AppState(_);
-        public static implicit operator AppState(EditState _) => new AppState(_);
+        public static implicit operator GameState(IdleState _) => new GameState(_);
+        public static implicit operator GameState(BuildState _) => new GameState(_);
+        public static implicit operator GameState(EditState _) => new GameState(_);
     }
 
     public struct IdleState {

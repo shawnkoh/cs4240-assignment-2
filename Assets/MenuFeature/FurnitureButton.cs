@@ -27,7 +27,7 @@ namespace MenuFeature {
             _store.FurnitureButtonTapped(_furniture);
         }
 
-        private void Subscriber(AppState state) {
+        private void Subscriber(GameState state) {
             state.Switch(
                 idleState => SetEnabled(true),
                 buildingState => SetEnabled(_furniture == buildingState.Furniture),

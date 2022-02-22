@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace PreviewFeature {
-    public class PreviewController : MonoBehaviour
+namespace EditIndicatorFeature {
+    public class EditIndicatorController : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

@@ -18,7 +18,7 @@ namespace MenuFeature {
             clicked += () => _store.CancelButtonTapped();
         }
 
-        private void Subscriber(AppState state) {
+        private void Subscriber(GameState state) {
             state.Switch(
                 idleState => SetEnabled(false),
                 buildState => SetEnabled(true),
