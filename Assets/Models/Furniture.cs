@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MyAssets.Models {
+namespace Models {
     [CreateAssetMenu(menuName = "Models/Furniture")]
     public class Furniture : ScriptableObject {
         public GameObject prefab;

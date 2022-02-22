@@ -1,9 +1,9 @@
-using MyAssets.Models;
+using Models;
 using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-namespace MyAssets.FurnitureAssetGeneratorFeature {
+namespace FurnitureAssetGeneratorFeature {
     public class FurnitureAssetGenerator : MonoBehaviour {
         [Tooltip("These are prefabs that will NOT be in the game. They are only used in the editor to generate Furniture Assets")]
         public GameObject[] furniturePrefabs;
@@ -18,9 +18,9 @@ namespace MyAssets.FurnitureAssetGeneratorFeature {
         private void GenerateFurnitureAsset(GameObject prefab) {
             var thumbnail = AssetPreview.GetMiniThumbnail(prefab);
             var furniture = ScriptableObject.CreateInstance<Furniture>();
-            prefab.tag = "Spawnable";
             furniture.image = thumbnail;
             furniture.prefab = prefab;
+            prefab.AddComponent<FurnitureTag>();
             var path = "Assets/FurnitureAssetGeneratorFeature/FurnitureAssets/" + prefab.name + ".asset";
             AssetDatabase.CreateAsset(furniture, path);
         }

@@ -1,18 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using AppFeature;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
-public class IndicatorController : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+namespace IndicatorFeature {
+    public class IndicatorController : MonoBehaviour {
+        public Store store;
+        private ARRaycastManager _raycastManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Awake() {
+            store.OnChange += Subscriber;
+            _raycastManager = FindObjectOfType<ARRaycastManager>();
+        }
+
+        private void OnDestroy() {
+            store.OnChange -= Subscriber;
+        }
+
+        private void Update() {
+            // TODO: Get raycast manager to cast
+        }
+
+        private void Subscriber(AppState appState) {
+            // TODO: Do i need to set enabled if i already set active?
+            appState.Switch(
+                idleState => {
+                    enabled = false;
+                    gameObject.SetActive(false);
+                },
+                buildingState => {
+                    enabled = true;
+                    gameObject.SetActive(true);
+                },
+                editingState => {
+                    enabled = false;
+                    gameObject.SetActive(false);
+                }
+            );
+        }
     }
 }
