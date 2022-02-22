@@ -3,7 +3,7 @@ using Models;
 using OneOf;
 using UnityEngine;
 
-namespace AppFeature {
+namespace GameFeature {
     [Serializable]
     [CreateAssetMenu(menuName = "Store/AppState")]
     public class AppState : OneOfBase<IdleState, BuildState, EditState> {
