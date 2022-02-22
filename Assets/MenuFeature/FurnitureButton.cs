@@ -11,7 +11,7 @@ namespace MenuFeature {
         public FurnitureButton(Store store, Furniture furniture) {
             _store = store;
             _furniture = furniture;
-            style.backgroundImage = _furniture.image;
+            style.backgroundImage = _furniture.thumbnail;
             style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
             name = _furniture.name;
             clicked += OnTapped;

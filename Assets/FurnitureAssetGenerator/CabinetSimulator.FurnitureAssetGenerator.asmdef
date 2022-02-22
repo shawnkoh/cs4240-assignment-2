@@ -1,0 +1,16 @@
+{
+    "name": "CabinetSimulator.FurnitureAssetGenerator",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cdaeb79a00d8e4b1b8d8202f0371652e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

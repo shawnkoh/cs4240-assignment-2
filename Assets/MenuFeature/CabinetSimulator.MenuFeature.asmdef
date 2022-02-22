@@ -1,0 +1,19 @@
+{
+    "name": "CabinetSimulator.MenuFeature",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b5f420d6024a04869b2ae82c3723aad0",
+        "GUID:cdaeb79a00d8e4b1b8d8202f0371652e",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

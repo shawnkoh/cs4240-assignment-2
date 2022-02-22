@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: f612d24c379e744b6b0f9b589cadb1c3
   m_SerializeEntries:
   - m_GUID: 7a20e10937c9d43ff8ff47724cced15f
-    m_Address: Assets/MyAssets/MenuFeature/Furnitures
+    m_Address: Assets/MenuFeature/Furnitures
     m_ReadOnly: 0
     m_SerializedLabels:
     - furniture

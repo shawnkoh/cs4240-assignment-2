@@ -1,4 +1,3 @@
-using System;
 using AppFeature;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;

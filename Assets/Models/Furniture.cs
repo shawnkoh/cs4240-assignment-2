@@ -3,9 +3,17 @@ using UnityEngine;
 namespace Models {
     [CreateAssetMenu(menuName = "Models/Furniture")]
     public class Furniture : ScriptableObject {
-        [SerializeField]
         public GameObject prefab;
-        [SerializeField]
-        public Texture2D image;
+        public Texture2D thumbnail {
+            get
+            {
+                // NB: Initial size doesn't matter. LoadImage overwrites.
+                var texture = new Texture2D(2, 2);
+                texture.LoadImage(rawThumbnail);
+                return texture;
+            }
+        }
+
+        public byte[] rawThumbnail;
     }
 }
