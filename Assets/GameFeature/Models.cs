@@ -20,15 +20,17 @@ namespace GameFeature {
 
     public struct BuildState {
         public Furniture Furniture;
-        public Vector3? HitPosition;
 
         public BuildState(Furniture furniture) {
             Furniture = furniture;
-            HitPosition = null;
         }
     }
 
     public struct EditState {
         public GameObject Furniture;
+
+        public EditState(GameObject furniture) {
+            Furniture = furniture;
+        }
     }
 }

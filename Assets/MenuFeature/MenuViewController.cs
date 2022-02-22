@@ -14,7 +14,7 @@ namespace MenuFeature {
         
         private VisualElement _buttonContainer;
 
-        private void Start() {
+        private void Awake() {
             var root = GetComponent<UIDocument>().rootVisualElement;
             // FIXME: This should be a ListView instead.
             var catalog = root.Q<VisualElement>("catalog");
@@ -30,7 +30,8 @@ namespace MenuFeature {
         }
 
         private void Subscriber(GameState state) {
-            // TODO: This will keep deleting and recreating.
+            // TODO: This is inefficient because it does not check
+            // if the state's type changed.
             _buttonContainer.Clear();
             state.Switch(
                 idleState => { },

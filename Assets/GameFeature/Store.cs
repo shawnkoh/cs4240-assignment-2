@@ -31,7 +31,6 @@ namespace AppFeature {
             gameState.Switch(
                 idleState => throw new InvalidOperationException(),
                 buildState => {
-                    Instantiate(buildState.Furniture.prefab);
                     gameState = new IdleState();
                 },
                 editState => throw new InvalidOperationException()
