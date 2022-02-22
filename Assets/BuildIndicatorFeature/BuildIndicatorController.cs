@@ -3,8 +3,8 @@ using AppFeature;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-namespace IndicatorFeature {
-    public class IndicatorController : MonoBehaviour {
+namespace BuildIndicatorFeature {
+    public class BuildIndicatorController : MonoBehaviour {
         public Store store;
         private ARRaycastManager _raycastManager;
 
