@@ -4,7 +4,7 @@ using GameFeature;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace BuildIndicatorFeature {
+namespace BuildFeature {
     public class PoseController : MonoBehaviour {
         public BuildSystem buildSystem;
 

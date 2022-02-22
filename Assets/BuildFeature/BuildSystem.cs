@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-namespace BuildIndicatorFeature {
+namespace BuildFeature {
     public class BuildSystem : MonoBehaviour {
         public UnityAction<Pose?> OnRaycast;
         public Store store;
