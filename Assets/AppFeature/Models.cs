@@ -27,6 +27,6 @@ namespace AppFeature {
     }
 
     public struct EditState {
-        public Furniture Furniture;
+        public GameObject Furniture;
     }
 }

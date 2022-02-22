@@ -7,7 +7,8 @@ namespace MenuFeature {
         
         public CancelButton(Store store) {
             _store = store;
-            
+            text = "Cancel";
+
             _store.OnChange += Subscriber;
             RegisterCallback<DetachFromPanelEvent>(_ => {
                 store.OnChange -= Subscriber;

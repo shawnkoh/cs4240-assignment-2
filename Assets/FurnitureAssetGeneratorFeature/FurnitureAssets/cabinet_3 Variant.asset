@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: cabinet_3 Variant
   m_EditorClassIdentifier: 
   prefab: {fileID: 1726999100937172357, guid: a2d3c630cdff94ed69670f5894edd655, type: 3}
-  image: {fileID: 8597360482269930223, guid: 0000000000000000d000000000000000, type: 0}
+  image: {fileID: 0}

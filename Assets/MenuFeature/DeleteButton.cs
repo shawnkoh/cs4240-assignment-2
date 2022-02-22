@@ -2,19 +2,19 @@ using AppFeature;
 using UnityEngine.UIElements;
 
 namespace MenuFeature {
-    public class PlaceButton: Button {
+    public class DeleteButton: Button {
         private readonly Store _store;
         
-        public PlaceButton(Store store) {
+        public DeleteButton(Store store) {
             _store = store;
-            text = "Place";
+            text = "Delete";
             
             _store.OnChange += Subscriber;
             RegisterCallback<DetachFromPanelEvent>(_ => {
                 store.OnChange -= Subscriber;
             });
 
-            clicked += () => _store.PlaceButtonTapped();
+            clicked += () => _store.DeleteButtonTapped();
         }
 
         private void Subscriber(AppState state) {

@@ -47,5 +47,17 @@ namespace AppFeature {
             );
             OnChange.Invoke(AppState);
         }
+
+        public void DeleteButtonTapped() {
+            AppState.Switch(
+                state => throw new InvalidOperationException(),
+                state => throw new InvalidOperationException(),
+                editState => {
+                    Destroy(editState.Furniture);
+                    AppState = new IdleState();
+                }
+            );
+            OnChange.Invoke(AppState);
+        }
     }
 }

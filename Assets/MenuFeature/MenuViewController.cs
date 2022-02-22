@@ -10,6 +10,8 @@ namespace MenuFeature {
     public class MenuViewController : MonoBehaviour {
         public Store store;
         private AsyncOperationHandle<IList<Furniture>> _loadHandle;
+        
+        private VisualElement _buttonContainer;
 
         private void Start() {
             var root = GetComponent<UIDocument>().rootVisualElement;
@@ -17,10 +19,33 @@ namespace MenuFeature {
             var catalog = root.Q<VisualElement>("catalog");
             _loadHandle = Addressables.LoadAssetsAsync<Furniture>("furniture", furniture => 
                 { catalog.Add(new FurnitureButton(store, furniture)); });
+            _buttonContainer = root.Q<VisualElement>("buttonContainer");
+            _buttonContainer.Add(new PlaceButton(store));
+            _buttonContainer.Add(new CancelButton(store));
+            store.OnChange += Subscriber;
         }
 
         private void OnDestroy() {
             Addressables.Release(_loadHandle);
+            store.OnChange -= Subscriber;
+        }
+
+        private void Subscriber(AppState state) {
+            // TODO: This will keep deleting and recreating.
+            foreach (var visualElement in _buttonContainer.Children()) {
+                _buttonContainer.Remove(visualElement);
+            }
+            state.Switch(
+                idleState => { },
+                buildState => {
+                    _buttonContainer.Add(new PlaceButton(store));
+                    _buttonContainer.Add(new CancelButton(store));
+                },
+                editState => {
+                    _buttonContainer.Add(new DeleteButton(store));
+                    _buttonContainer.Add(new CancelButton(store));
+                }
+            );
         }
     }
 }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: rack_1 Variant
   m_EditorClassIdentifier: 
   prefab: {fileID: 4371676552298586696, guid: e83edbaec2cda46ecbe67d89b25634bf, type: 3}
-  image: {fileID: 8597360482269930223, guid: 0000000000000000d000000000000000, type: 0}
+  image: {fileID: 0}

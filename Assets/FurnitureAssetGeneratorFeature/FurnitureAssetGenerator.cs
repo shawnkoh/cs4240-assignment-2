@@ -14,13 +14,14 @@ namespace FurnitureAssetGeneratorFeature {
                 GenerateFurnitureAsset(prefab);
             }
         }
-
+        
         private void GenerateFurnitureAsset(GameObject prefab) {
-            var thumbnail = AssetPreview.GetMiniThumbnail(prefab);
+            var thumbnail = AssetPreview.GetAssetPreview(prefab);
             var furniture = ScriptableObject.CreateInstance<Furniture>();
             furniture.image = thumbnail;
             furniture.prefab = prefab;
-            prefab.AddComponent<FurnitureTag>();
+            if (!prefab.GetComponent<FurnitureTag>())
+                prefab.AddComponent<FurnitureTag>();
             var path = "Assets/FurnitureAssetGeneratorFeature/FurnitureAssets/" + prefab.name + ".asset";
             AssetDatabase.CreateAsset(furniture, path);
         }

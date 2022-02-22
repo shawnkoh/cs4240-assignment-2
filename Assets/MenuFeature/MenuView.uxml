@@ -1,21 +1,8 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance"
-         engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" ml="UnityEditor.XR.MagicLeap"
-         noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Background"
-                      style="height: auto; background-color: rgba(0, 0, 0, 0); flex-grow: 1; align-items: center; justify-content: flex-end;">
-        <ui:VisualElement
-                style="background-color: rgba(255, 255, 255, 0.39); border-top-left-radius: 16px; border-bottom-left-radius: 16px; border-top-right-radius: 16px; border-bottom-right-radius: 16px; flex-grow: initial; flex-shrink: 1; flex-direction: column; flex-wrap: nowrap; bottom: 10%; align-items: center; justify-content: center; padding-left: 8px; padding-right: 8px; padding-top: 8px; padding-bottom: 8px;">
-            <ui:VisualElement name="catalog"
-                              style="flex-wrap: nowrap; flex-direction: row; margin-bottom: 4px; margin-top: 0;">
-                <ui:Button display-tooltip-when-elided="true" name="furniture0"
-                           style="-unity-background-scale-mode: scale-to-fit; width: 48px; height: 48px; background-image: url(&apos;/Assets/MyAssets/UI/rack2.png&apos;);"/>
-                <ui:Button display-tooltip-when-elided="true" name="furniture1"
-                           style="-unity-background-scale-mode: scale-to-fit; width: 48px; height: 48px; background-image: url(&apos;/Assets/MyAssets/UI/rack1.png&apos;);"/>
-                <ui:Button display-tooltip-when-elided="true" name="furniture2"
-                           style="-unity-background-scale-mode: scale-to-fit; width: 48px; height: 48px; background-image: url(&apos;/Assets/MyAssets/UI/rack3.png&apos;);"/>
-            </ui:VisualElement>
-            <ui:Button text="Place Furniture" display-tooltip-when-elided="true" name="primary"
-                       style="flex-grow: 0; flex-shrink: 0;"/>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" ml="UnityEditor.XR.MagicLeap" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Background" style="height: auto; background-color: rgba(0, 0, 0, 0); flex-grow: 1; align-items: center; justify-content: flex-end;">
+        <ui:VisualElement style="background-color: rgba(255, 255, 255, 0.39); border-top-left-radius: 16px; border-bottom-left-radius: 16px; border-top-right-radius: 16px; border-bottom-right-radius: 16px; flex-grow: initial; flex-shrink: 1; flex-direction: column; flex-wrap: nowrap; bottom: 10%; align-items: center; justify-content: center; padding-left: 8px; padding-right: 8px; padding-top: 8px; padding-bottom: 8px;">
+            <ui:VisualElement name="catalog" style="flex-wrap: nowrap; flex-direction: row; margin-bottom: 4px; margin-top: 0;" />
+            <ui:VisualElement name="buttonContainer" style="flex-direction: row;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
