@@ -18,8 +18,14 @@ namespace EditFeature {
         private void Update() {
             if (editSystem.Furniture == null)
                 throw new InvalidOperationException();
-            // TODO: This needs to be above.
-            gameObject.transform.SetPositionAndRotation(editSystem.Furniture.transform.position, editSystem.Furniture.transform.rotation);
+            var position = editSystem.Furniture.transform.position;
+            var offset = editSystem.Furniture.GetComponent<MeshRenderer>().bounds.extents.y + gameObject.GetComponentInChildren<MeshRenderer>().bounds.extents.y;
+            var y = position.y + offset;
+            var indicatorPosition = new Vector3(position.x, y, position.z);
+            gameObject.transform.position = indicatorPosition;
+
+            var g = GameObject.Find("rack_100");
+            gameObject.transform.position = g.transform.position;
         }
 
         private void Subscriber([CanBeNull] GameObject furniture) {

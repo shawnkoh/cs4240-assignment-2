@@ -27,7 +27,8 @@ namespace BuildFeature {
         public void PlaceFurniture() {
             if (!Pose.HasValue && !BuildState.HasValue)
                 throw new InvalidOperationException();
-            Instantiate(BuildState.Value.Furniture.prefab, Pose.Value.position, Pose.Value.rotation);
+            // Instantiate(BuildState.Value.Furniture.prefab, Pose.Value.position, Pose.Value.rotation);
+            Instantiate(BuildState.Value.Furniture.prefab, Pose.Value.position, Quaternion.identity);
         }
 
         public void Activate(BuildState buildState) {

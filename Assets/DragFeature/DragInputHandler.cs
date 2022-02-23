@@ -32,6 +32,7 @@ namespace DragFeature {
             
             if (!_raycastManager.Raycast(touch.position, hits, TrackableType.Planes))
                 return;
+            var raycastHit = hits[0];
 
             if (touch.phase == TouchPhase.Began) {
                 if (!Physics.Raycast(ray, out hit))
@@ -39,10 +40,10 @@ namespace DragFeature {
                 if (hit.collider.gameObject.GetComponent<DraggableTag>() == null)
                     return;
                 _furniture = hit.collider.gameObject;
-                DragSystem.OnDrag.Invoke(hit.collider.gameObject);
+                DragSystem.OnDrag.Invoke(_furniture);
                 _isDraggable = true;
             } else if (_isDraggable && touch.phase == TouchPhase.Moved && _furniture != null) {
-                _furniture.transform.position = hits[0].pose.position;
+                _furniture.transform.position = raycastHit.pose.position;
             } else if (touch.phase == TouchPhase.Ended) {
                 DragSystem.OnDrag.Invoke(null);
                 _furniture = null;
