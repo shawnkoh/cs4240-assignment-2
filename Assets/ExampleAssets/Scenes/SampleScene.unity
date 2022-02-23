@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 1081543674}
   - component: {fileID: 1081543673}
   m_Layer: 0
-  m_Name: SceneSystem
+  m_Name: BuildSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

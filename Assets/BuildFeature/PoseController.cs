@@ -5,26 +5,12 @@ namespace BuildFeature {
         public BuildSystem buildSystem;
 
         private void Awake() {
-            buildSystem.OnStatusChanged += StatusSubscriber;
-            StatusSubscriber(buildSystem.BuildState);
-        }
-
-        private void OnDestroy() {
-            buildSystem.OnStatusChanged -= StatusSubscriber;
-        }
-
-        private void Update() {
-            // TODO: This should use BuildSystem.OnChange instead
+            buildSystem.OnPoseChanged += Subscriber;
             Subscriber(buildSystem.Pose);
         }
 
-        private void StatusSubscriber(BuildState? state) {
-            if (!state.HasValue) {
-                enabled = false;
-                return;
-            }
-
-            enabled = true;
+        private void OnDestroy() {
+            buildSystem.OnPoseChanged -= Subscriber;
         }
 
         private void Subscriber(Pose? pose) {

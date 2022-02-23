@@ -6,10 +6,23 @@ namespace BuildFeature {
     [CreateAssetMenu(menuName = "BuildFeature/BuildSystem")]
     public class BuildSystem : ScriptableObject {
         public UnityAction<BuildState?> OnStatusChanged;
+        public UnityAction<Pose?> OnPoseChanged;
 
-        public BuildState? BuildState;
+        public BuildState? BuildState {
+            get;
+            private set;
+        }
+
         // TODO: We should really try to put pose inside BuildState.
-        public Pose? Pose;
+        public Pose? Pose {
+            get;
+            private set;
+        }
+
+        public void SetPose(Pose? pose) {
+            Pose = pose;
+            OnPoseChanged.Invoke(pose);
+        }
 
         public void PlaceFurniture() {
             if (!Pose.HasValue && !BuildState.HasValue)
@@ -26,6 +39,7 @@ namespace BuildFeature {
             BuildState = null;
             Pose = null;
             OnStatusChanged.Invoke(null);
+            OnPoseChanged.Invoke(null);
         }
     }
 }

@@ -6,7 +6,8 @@
         "Models",
         "Unity.Addressables",
         "Unity.ResourceManager",
-        "CabinetSimulator.BuildFeature"
+        "CabinetSimulator.BuildFeature",
+        "CabinetSimulator.FurnitureAssetGenerator"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Models;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -26,14 +23,14 @@ namespace BuildFeature {
             var hits = new List<ARRaycastHit>();
             _raycastManager.Raycast(screenCenter, hits, TrackableType.Planes);
             if (hits.Count == 0) {
-                buildSystem.Pose = null;
+                buildSystem.SetPose(null);
                 return;
             }
 
             var hit = hits[0];
             // TODO: Check if location will collide
             // Alternatively, check if hit another Furniture.
-            buildSystem.Pose = hit.pose;
+            buildSystem.SetPose(hit.pose);
         }
 
         private void Subscriber(BuildState? state) {
