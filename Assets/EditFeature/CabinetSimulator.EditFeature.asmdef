@@ -1,18 +1,13 @@
 {
-    "name": "GameFeature",
+    "name": "CabinetSimulator.EditFeature",
     "rootNamespace": "",
-    "references": [
-        "UnityEngine.UIElementsModule",
-        "Models",
-        "CabinetSimulator.BuildFeature",
-        "CabinetSimulator.EditFeature"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

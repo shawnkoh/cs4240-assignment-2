@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22138d199dba4592a4457edc1ae41b77, type: 3}
-  m_Name: GameStore
+  m_Script: {fileID: 11500000, guid: 274052e3e3a54dc6832b7b31a508aa46, type: 3}
+  m_Name: EditSystem
   m_EditorClassIdentifier: 
-  buildSystem: {fileID: 11400000, guid: 579b8b7af7769447aa16e4bd94af2906, type: 2}
-  editSystem: {fileID: 11400000, guid: b44a0ba89a07e4995b936fb48193068e, type: 2}
+  furniture: {fileID: 0}

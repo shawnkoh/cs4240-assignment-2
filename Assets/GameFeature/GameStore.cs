@@ -1,5 +1,6 @@
 using System;
 using BuildFeature;
+using EditFeature;
 using Models;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +11,7 @@ namespace GameFeature {
         public UnityAction<GameState> OnChange;
         public GameState gameState;
         public BuildSystem buildSystem;
+        public EditSystem editSystem;
 
         private void Awake() {
             // TODO: Implement discarding.
@@ -25,6 +27,7 @@ namespace GameFeature {
                 },
                 buildState => throw new InvalidOperationException(),
                 editState => {
+                    editSystem.Deactivate();
                     var buildState = new BuildState(furniture);
                     gameState = buildState;
                     buildSystem.Activate(buildState);
@@ -54,6 +57,7 @@ namespace GameFeature {
                     gameState = new IdleState();
                 },
                 editState => {
+                    editSystem.Deactivate();
                     gameState = new IdleState();
                 }
             );
@@ -65,7 +69,8 @@ namespace GameFeature {
                 state => throw new InvalidOperationException(),
                 state => throw new InvalidOperationException(),
                 editState => {
-                    Destroy(editState.Furniture);
+                    editSystem.DestroyFurniture();
+                    editSystem.Deactivate();
                     gameState = new IdleState();
                 }
             );
