@@ -1,4 +1,5 @@
 using System;
+using Models;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,7 +14,6 @@ namespace BuildFeature {
             private set;
         }
 
-        // TODO: We should really try to put pose inside BuildState.
         public Pose? Pose {
             get;
             private set;
@@ -27,8 +27,18 @@ namespace BuildFeature {
         public void PlaceFurniture() {
             if (!Pose.HasValue && !BuildState.HasValue)
                 throw new InvalidOperationException();
-            // Instantiate(BuildState.Value.Furniture.prefab, Pose.Value.position, Pose.Value.rotation);
-            Instantiate(BuildState.Value.Furniture.prefab, Pose.Value.position, Quaternion.identity);
+            var placed = Instantiate(BuildState.Value.Furniture.prefab, Pose.Value.position, Pose.Value.rotation);
+            var placedBounds = placed.GetComponent<MeshCollider>().bounds;
+            var furnitures = FindObjectsOfType<FurnitureTag>();
+            foreach (var furnitureTag in furnitures) {
+                var obj = furnitureTag.gameObject;
+                if (obj == placed)
+                    continue;
+                if (obj.GetComponent<MeshCollider>().bounds.Intersects(placedBounds)) {
+                    Destroy(placed);
+                    return;
+                }
+            }
         }
 
         public void Activate(BuildState buildState) {

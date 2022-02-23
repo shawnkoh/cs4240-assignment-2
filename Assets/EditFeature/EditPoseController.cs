@@ -23,9 +23,6 @@ namespace EditFeature {
             var y = position.y + offset;
             var indicatorPosition = new Vector3(position.x, y, position.z);
             gameObject.transform.position = indicatorPosition;
-
-            var g = GameObject.Find("rack_100");
-            gameObject.transform.position = g.transform.position;
         }
 
         private void Subscriber([CanBeNull] GameObject furniture) {
