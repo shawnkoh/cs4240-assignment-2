@@ -45,12 +45,13 @@ namespace DragFeature {
                 _furniture.transform.position = hits[0].pose.position;
             } else if (touch.phase == TouchPhase.Ended) {
                 DragSystem.OnDrag.Invoke(null);
+                _furniture = null;
                 _isDraggable = false;
             }
         }
 
         private void Subscriber(bool isActive) {
-            gameObject.SetActive(isActive);
+            enabled = isActive;
         }
     }
 }
