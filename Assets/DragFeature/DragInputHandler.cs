@@ -29,7 +29,7 @@ namespace DragFeature {
             RaycastHit hit;
             var ray = Camera.current.ScreenPointToRay(touch.position);
             var hits = new List<ARRaycastHit>();
-
+            
             if (!_raycastManager.Raycast(touch.position, hits, TrackableType.Planes))
                 return;
 

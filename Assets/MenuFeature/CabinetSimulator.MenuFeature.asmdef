@@ -2,10 +2,11 @@
     "name": "CabinetSimulator.MenuFeature",
     "rootNamespace": "",
     "references": [
-        "GameFeature",
-        "Models",
+        "UnityEngine.UIElementsModule",
         "Unity.Addressables",
         "Unity.ResourceManager",
+        "GameFeature",
+        "Models",
         "CabinetSimulator.BuildFeature",
         "CabinetSimulator.FurnitureAssetGenerator"
     ],
