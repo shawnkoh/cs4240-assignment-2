@@ -4,7 +4,7 @@ namespace Models {
     [CreateAssetMenu(menuName = "Models/Furniture")]
     public class Furniture : ScriptableObject {
         public GameObject prefab;
-        public Texture2D thumbnail {
+        public Texture2D Thumbnail {
             get
             {
                 // NB: Initial size doesn't matter. LoadImage overwrites.

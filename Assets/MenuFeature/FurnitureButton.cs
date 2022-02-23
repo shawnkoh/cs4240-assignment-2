@@ -11,7 +11,7 @@ namespace MenuFeature {
         public FurnitureButton(GameStore gameStore, Furniture furniture) {
             _gameStore = gameStore;
             _furniture = furniture;
-            style.backgroundImage = _furniture.thumbnail;
+            style.backgroundImage = _furniture.Thumbnail;
             style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
             name = _furniture.name;
             clicked += OnTapped;
@@ -20,6 +20,7 @@ namespace MenuFeature {
             RegisterCallback<DetachFromPanelEvent>(_ => {
                 gameStore.OnChange -= Subscriber;
             });
+            Subscriber(gameStore.gameState);
         }
 
         private void OnTapped() {

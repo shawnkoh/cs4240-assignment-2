@@ -5,7 +5,8 @@
         "GameFeature",
         "Models",
         "Unity.Addressables",
-        "Unity.ResourceManager"
+        "Unity.ResourceManager",
+        "CabinetSimulator.BuildFeature"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

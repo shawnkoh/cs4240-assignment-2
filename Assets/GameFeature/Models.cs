@@ -1,4 +1,5 @@
 using System;
+using BuildFeature;
 using Models;
 using OneOf;
 using UnityEngine;
@@ -16,14 +17,6 @@ namespace GameFeature {
     }
 
     public struct IdleState {
-    }
-
-    public struct BuildState {
-        public Furniture Furniture;
-
-        public BuildState(Furniture furniture) {
-            Furniture = furniture;
-        }
     }
 
     public struct EditState {

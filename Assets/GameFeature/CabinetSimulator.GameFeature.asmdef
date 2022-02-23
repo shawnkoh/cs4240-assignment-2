@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "UnityEngine.UIElementsModule",
-        "Models"
+        "Models",
+        "CabinetSimulator.BuildFeature"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

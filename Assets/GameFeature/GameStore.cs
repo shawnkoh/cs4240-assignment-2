@@ -1,4 +1,5 @@
 using System;
+using BuildFeature;
 using Models;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,19 +9,25 @@ namespace GameFeature {
     public class GameStore: ScriptableObject {
         public UnityAction<GameState> OnChange;
         public GameState gameState;
+        public BuildSystem buildSystem;
 
         private void Awake() {
-            gameState = new IdleState();
+            // TODO: Implement discarding.
+            gameState ??= new IdleState();
         }
 
         public void FurnitureButtonTapped(Furniture furniture) {
             gameState.Switch(
                 idleState => {
-                    gameState = new BuildState(furniture);
+                    var buildState = new BuildState(furniture);
+                    gameState = buildState;
+                    buildSystem.Activate(buildState);
                 },
                 buildState => throw new InvalidOperationException(),
                 editState => {
-                    gameState = new BuildState(furniture);
+                    var buildState = new BuildState(furniture);
+                    gameState = buildState;
+                    buildSystem.Activate(buildState);
                 }
             );
             OnChange.Invoke(gameState);
@@ -30,6 +37,8 @@ namespace GameFeature {
             gameState.Switch(
                 idleState => throw new InvalidOperationException(),
                 buildState => {
+                    buildSystem.PlaceFurniture();
+                    buildSystem.Deactivate();
                     gameState = new IdleState();
                 },
                 editState => throw new InvalidOperationException()
@@ -41,6 +50,7 @@ namespace GameFeature {
             gameState.Switch(
                 idleState => throw new InvalidOperationException(),
                 buildState => {
+                    buildSystem.Deactivate();
                     gameState = new IdleState();
                 },
                 editState => {
