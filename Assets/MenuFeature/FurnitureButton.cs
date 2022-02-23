@@ -1,4 +1,3 @@
-using AppFeature;
 using GameFeature;
 using Models;
 using UnityEngine;
@@ -6,25 +5,25 @@ using UnityEngine.UIElements;
 
 namespace MenuFeature {
     public class FurnitureButton : Button {
-        private readonly Store _store;
+        private readonly GameStore _gameStore;
         private readonly Furniture _furniture;
 
-        public FurnitureButton(Store store, Furniture furniture) {
-            _store = store;
+        public FurnitureButton(GameStore gameStore, Furniture furniture) {
+            _gameStore = gameStore;
             _furniture = furniture;
             style.backgroundImage = _furniture.thumbnail;
             style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
             name = _furniture.name;
             clicked += OnTapped;
             
-            store.OnChange += Subscriber;
+            gameStore.OnChange += Subscriber;
             RegisterCallback<DetachFromPanelEvent>(_ => {
-                store.OnChange -= Subscriber;
+                gameStore.OnChange -= Subscriber;
             });
         }
 
         private void OnTapped() {
-            _store.FurnitureButtonTapped(_furniture);
+            _gameStore.FurnitureButtonTapped(_furniture);
         }
 
         private void Subscriber(GameState state) {

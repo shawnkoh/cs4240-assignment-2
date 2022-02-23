@@ -1,21 +1,20 @@
-using AppFeature;
 using GameFeature;
 using UnityEngine.UIElements;
 
 namespace MenuFeature {
     public class CancelButton: Button {
-        private readonly Store _store;
+        private readonly GameStore _gameStore;
         
-        public CancelButton(Store store) {
-            _store = store;
+        public CancelButton(GameStore gameStore) {
+            _gameStore = gameStore;
             text = "Cancel";
 
-            _store.OnChange += Subscriber;
+            _gameStore.OnChange += Subscriber;
             RegisterCallback<DetachFromPanelEvent>(_ => {
-                store.OnChange -= Subscriber;
+                gameStore.OnChange -= Subscriber;
             });
 
-            clicked += () => _store.CancelButtonTapped();
+            clicked += () => _gameStore.CancelButtonTapped();
         }
 
         private void Subscriber(GameState state) {

@@ -1,21 +1,20 @@
-using AppFeature;
 using GameFeature;
 using UnityEngine.UIElements;
 
 namespace MenuFeature {
     public class DeleteButton: Button {
-        private readonly Store _store;
+        private readonly GameStore _gameStore;
         
-        public DeleteButton(Store store) {
-            _store = store;
+        public DeleteButton(GameStore gameStore) {
+            _gameStore = gameStore;
             text = "Delete";
             
-            _store.OnChange += Subscriber;
+            _gameStore.OnChange += Subscriber;
             RegisterCallback<DetachFromPanelEvent>(_ => {
-                store.OnChange -= Subscriber;
+                gameStore.OnChange -= Subscriber;
             });
 
-            clicked += () => _store.DeleteButtonTapped();
+            clicked += () => _gameStore.DeleteButtonTapped();
         }
 
         private void Subscriber(GameState state) {

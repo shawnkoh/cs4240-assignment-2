@@ -1,21 +1,20 @@
-using AppFeature;
 using GameFeature;
 using UnityEngine.UIElements;
 
 namespace MenuFeature {
     public class PlaceButton: Button {
-        private readonly Store _store;
+        private readonly GameStore _gameStore;
         
-        public PlaceButton(Store store) {
-            _store = store;
+        public PlaceButton(GameStore gameStore) {
+            _gameStore = gameStore;
             text = "Place";
             
-            _store.OnChange += Subscriber;
+            _gameStore.OnChange += Subscriber;
             RegisterCallback<DetachFromPanelEvent>(_ => {
-                store.OnChange -= Subscriber;
+                gameStore.OnChange -= Subscriber;
             });
 
-            clicked += () => _store.PlaceButtonTapped();
+            clicked += () => _gameStore.PlaceButtonTapped();
         }
 
         private void Subscriber(GameState state) {

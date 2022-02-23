@@ -1,8 +1,4 @@
-using System;
-using AppFeature;
-using GameFeature;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace BuildFeature {
     public class PoseController : MonoBehaviour {

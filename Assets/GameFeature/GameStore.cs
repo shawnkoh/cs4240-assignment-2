@@ -1,12 +1,11 @@
 using System;
-using GameFeature;
 using Models;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AppFeature {
+namespace GameFeature {
     [CreateAssetMenu(menuName = "AppFeature/Store")]
-    public class Store: ScriptableObject {
+    public class GameStore: ScriptableObject {
         public UnityAction<GameState> OnChange;
         public GameState gameState;
 

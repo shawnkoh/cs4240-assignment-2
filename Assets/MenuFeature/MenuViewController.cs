@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using AppFeature;
 using GameFeature;
 using Models;
 using UnityEngine;
@@ -9,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace MenuFeature {
     public class MenuViewController : MonoBehaviour {
-        public Store store;
+        public GameStore gameStore;
         private AsyncOperationHandle<IList<Furniture>> _loadHandle;
         
         private VisualElement _buttonContainer;
@@ -19,14 +18,14 @@ namespace MenuFeature {
             // FIXME: This should be a ListView instead.
             var catalog = root.Q<VisualElement>("catalog");
             _loadHandle = Addressables.LoadAssetsAsync<Furniture>("furniture", furniture => 
-                { catalog.Add(new FurnitureButton(store, furniture)); });
+                { catalog.Add(new FurnitureButton(gameStore, furniture)); });
             _buttonContainer = root.Q<VisualElement>("buttonContainer");
-            store.OnChange += Subscriber;
+            gameStore.OnChange += Subscriber;
         }
 
         private void OnDestroy() {
             Addressables.Release(_loadHandle);
-            store.OnChange -= Subscriber;
+            gameStore.OnChange -= Subscriber;
         }
 
         private void Subscriber(GameState state) {
@@ -36,12 +35,12 @@ namespace MenuFeature {
             state.Switch(
                 idleState => { },
                 buildState => {
-                    _buttonContainer.Add(new PlaceButton(store));
-                    _buttonContainer.Add(new CancelButton(store));
+                    _buttonContainer.Add(new PlaceButton(gameStore));
+                    _buttonContainer.Add(new CancelButton(gameStore));
                 },
                 editState => {
-                    _buttonContainer.Add(new DeleteButton(store));
-                    _buttonContainer.Add(new CancelButton(store));
+                    _buttonContainer.Add(new DeleteButton(gameStore));
+                    _buttonContainer.Add(new CancelButton(gameStore));
                 }
             );
         }
