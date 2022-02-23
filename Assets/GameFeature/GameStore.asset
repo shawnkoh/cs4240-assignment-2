@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildSystem: {fileID: 11400000, guid: 579b8b7af7769447aa16e4bd94af2906, type: 2}
   editSystem: {fileID: 11400000, guid: b44a0ba89a07e4995b936fb48193068e, type: 2}
+  dragSystem: {fileID: 11400000, guid: 700459ec9595d4dbda7fe703c0b765ee, type: 2}

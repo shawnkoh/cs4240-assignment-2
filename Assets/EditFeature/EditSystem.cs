@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace EditFeature {
-    [CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
+    [CreateAssetMenu(menuName = "EditFeature/EditSystem")]
     public class EditSystem : ScriptableObject {
         public UnityAction<GameObject?> OnChange;
         

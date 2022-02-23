@@ -8,6 +8,7 @@ namespace EditFeature {
 
         private void Awake() {
             editSystem.OnChange += Subscriber;
+            Subscriber(editSystem.Furniture);
         }
 
         private void OnDestroy() {

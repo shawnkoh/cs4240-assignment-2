@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294607e4383c4eaf8f1f0e26343c1de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EditSystem: {fileID: 11400000, guid: b44a0ba89a07e4995b936fb48193068e, type: 2}
+  editSystem: {fileID: 11400000, guid: b44a0ba89a07e4995b936fb48193068e, type: 2}
 --- !u!1 &388525029
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,8 +518,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1081543674}
   - component: {fileID: 1081543673}
+  - component: {fileID: 1081543675}
   m_Layer: 0
-  m_Name: BuildSystem
+  m_Name: SceneSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -552,6 +553,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1081543675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081543672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88be6f769e3245429de260f8969d8efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DragSystem: {fileID: 11400000, guid: 700459ec9595d4dbda7fe703c0b765ee, type: 2}
 --- !u!850595691 &1117636138
 LightingSettings:
   m_ObjectHideFlags: 0

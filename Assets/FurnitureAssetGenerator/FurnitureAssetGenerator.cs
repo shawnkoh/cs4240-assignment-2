@@ -1,9 +1,10 @@
+using DragFeature;
 using Models;
 using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-namespace FurnitureAssetGeneratorFeature {
+namespace FurnitureAssetGenerator {
     public class FurnitureAssetGenerator : MonoBehaviour {
         [Tooltip("These are prefabs that will NOT be in the game. They are only used in the editor to generate Furniture Assets")]
         public GameObject[] furniturePrefabs;
@@ -23,6 +24,8 @@ namespace FurnitureAssetGeneratorFeature {
             furniture.prefab = prefab;
             if (!prefab.GetComponent<FurnitureTag>())
                 prefab.AddComponent<FurnitureTag>();
+            if (!prefab.GetComponent<DraggableTag>())
+                prefab.AddComponent<DraggableTag>();
             var path = "Assets/FurnitureAssetGenerator/FurnitureAssets/" + prefab.name + ".asset";
             AssetDatabase.CreateAsset(furniture, path);
         }

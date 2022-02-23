@@ -1,6 +1,8 @@
 using System;
 using BuildFeature;
+using DragFeature;
 using EditFeature;
+using JetBrains.Annotations;
 using Models;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,10 +14,47 @@ namespace GameFeature {
         public GameState gameState;
         public BuildSystem buildSystem;
         public EditSystem editSystem;
+        public DragSystem dragSystem;
 
         private void Awake() {
             // TODO: Implement discarding.
             gameState ??= new IdleState();
+            dragSystem.OnDrag += DragSubscriber;
+            OnChange += Subscriber;
+        }
+
+        private void Subscriber(GameState state) {
+            state.Switch(
+                idleState => dragSystem.Activate(),
+                buildState => dragSystem.Deactivate(),
+                editState => dragSystem.Activate()
+            );
+        }
+
+        private void OnDestroy() {
+            dragSystem.OnDrag -= DragSubscriber;
+            OnChange -= Subscriber;
+        }
+
+        private void DragSubscriber([CanBeNull] GameObject gameObject) {
+            if (gameObject == null) {
+                gameState.Switch(
+                    idleState => { },
+                    buildState => throw new InvalidOperationException(),
+                    editState => { }
+                );
+                return;
+            }
+            
+            gameState.Switch(
+                idleState => {
+                    editSystem.Activate(gameObject);
+                    gameState = new EditState(gameObject);
+                    OnChange.Invoke(gameState);
+                },
+                buildState => throw new InvalidOperationException(),
+                editState => { }
+            );
         }
 
         public void FurnitureButtonTapped(Furniture furniture) {

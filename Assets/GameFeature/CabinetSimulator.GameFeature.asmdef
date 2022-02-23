@@ -5,7 +5,8 @@
         "UnityEngine.UIElementsModule",
         "Models",
         "CabinetSimulator.BuildFeature",
-        "CabinetSimulator.EditFeature"
+        "CabinetSimulator.EditFeature",
+        "CabinetSimulator.DragFeature"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

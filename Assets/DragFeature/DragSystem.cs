@@ -10,7 +10,7 @@ namespace DragFeature {
         }
         public UnityAction<bool> OnChange;
 
-        public UnityAction<GameObject> OnDrag;
+        public UnityAction<GameObject?> OnDrag;
 
         public void Activate() {
             IsActive = true;
